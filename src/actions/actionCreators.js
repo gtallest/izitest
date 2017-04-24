@@ -5,7 +5,6 @@ export const SORT_MEMORIALS_BY_DATE = "SORT_MEMORIALS_BY_DATE"
 export const SORT_MEMORIALS_BY_LAST_NAME = "SORT_MEMORIALS_BY_LAST_NAME"
 
 function receiveMemorials (json) {
-  console.log('memorials received', json.data.data)
   return {
     type: RECEIVE_MEMORIALS,
     memorials: json.data.data.sort((a, b) => (a.creationDate < b.creationDate ? -1 : 1))
@@ -19,6 +18,8 @@ export function sortMemorialsByDate (json) {
   }
 }
 
+// some Memorials are missing the name property, or parts of it (name.first, name.last)
+// the sort function includes checks for these cases
 export function sortMemorialsByLastName (json) {
   return {
     type: SORT_MEMORIALS_BY_LAST_NAME,

@@ -20706,23 +20706,17 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(195);
 
-var _actionCreators = __webpack_require__(214);
-
 var _Header = __webpack_require__(171);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _ContentPanel = __webpack_require__(172);
+var _ContentContainer = __webpack_require__(254);
 
-var _ContentPanel2 = _interopRequireDefault(_ContentPanel);
+var _ContentContainer2 = _interopRequireDefault(_ContentContainer);
 
 var _Footer = __webpack_require__(170);
 
 var _Footer2 = _interopRequireDefault(_Footer);
-
-var _Main = __webpack_require__(248);
-
-var _Main2 = _interopRequireDefault(_Main);
 
 __webpack_require__(252);
 
@@ -20750,7 +20744,7 @@ var App = function (_Component) {
         'div',
         null,
         _react2.default.createElement(_Header2.default, null),
-        _react2.default.createElement(_Main2.default, null),
+        _react2.default.createElement(_ContentContainer2.default, null),
         _react2.default.createElement(_Footer2.default, null)
       );
     }
@@ -20926,7 +20920,12 @@ var Header = function (_Component) {
       return _react2.default.createElement(
         "div",
         { className: "header" },
-        _react2.default.createElement("img", { className: "header-logo", src: "public/images/everdays-logo.png" })
+        _react2.default.createElement("img", { className: "header-logo", src: "public/images/everdays-logo.png" }),
+        _react2.default.createElement(
+          "span",
+          { className: "header-subtitle" },
+          " Everdays Coding Project by Marc Wong"
+        )
       );
     }
   }]);
@@ -21022,13 +21021,11 @@ var ContentPanel = function (_Component) {
   }, {
     key: 'sortByLastName',
     value: function sortByLastName() {
-      console.log('sorting by last name');
       this.props.sortByLastName(this.props.memorials);
     }
   }, {
     key: 'sortByDate',
     value: function sortByDate() {
-      console.log('sorting by date');
       this.props.sortByDate(this.props.memorials);
     }
   }, {
@@ -21039,8 +21036,8 @@ var ContentPanel = function (_Component) {
         { className: 'content-panel' },
         _react2.default.createElement(
           'h2',
-          null,
-          'Memorial List'
+          { className: 'top-header' },
+          'Memorials List'
         ),
         _react2.default.createElement(
           'div',
@@ -23711,7 +23708,6 @@ var SORT_MEMORIALS_BY_DATE = exports.SORT_MEMORIALS_BY_DATE = "SORT_MEMORIALS_BY
 var SORT_MEMORIALS_BY_LAST_NAME = exports.SORT_MEMORIALS_BY_LAST_NAME = "SORT_MEMORIALS_BY_LAST_NAME";
 
 function receiveMemorials(json) {
-  console.log('memorials received', json.data.data);
   return {
     type: RECEIVE_MEMORIALS,
     memorials: json.data.data.sort(function (a, b) {
@@ -23729,6 +23725,8 @@ function sortMemorialsByDate(json) {
   };
 }
 
+// some Memorials are missing the name property, or parts of it (name.first, name.last)
+// the sort function includes checks for these cases
 function sortMemorialsByLastName(json) {
   return {
     type: SORT_MEMORIALS_BY_LAST_NAME,
@@ -23789,11 +23787,10 @@ function memorials() {
 
   switch (action.type) {
     case _actionCreators.RECEIVE_MEMORIALS:
-      return action.memorials;
+      return [].concat(_toConsumableArray(action.memorials));
     case _actionCreators.SORT_MEMORIALS_BY_DATE:
       return [].concat(_toConsumableArray(action.memorials));
     case _actionCreators.SORT_MEMORIALS_BY_LAST_NAME:
-      console.log(state);
       return [].concat(_toConsumableArray(action.memorials));
     default:
       return state;
@@ -27178,85 +27175,7 @@ thunk.withExtraArgument = createThunkMiddleware;
 exports['default'] = thunk;
 
 /***/ }),
-/* 248 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(76);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(195);
-
-var _actionCreators = __webpack_require__(214);
-
-var _Header = __webpack_require__(171);
-
-var _Header2 = _interopRequireDefault(_Header);
-
-var _ContentPanel = __webpack_require__(172);
-
-var _ContentPanel2 = _interopRequireDefault(_ContentPanel);
-
-var _Footer = __webpack_require__(170);
-
-var _Footer2 = _interopRequireDefault(_Footer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Main = function (_Component) {
-  _inherits(Main, _Component);
-
-  function Main() {
-    _classCallCheck(this, Main);
-
-    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
-  }
-
-  _createClass(Main, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(_ContentPanel2.default, null);
-    }
-  }]);
-
-  return Main;
-}(_react.Component);
-
-function mapDispatchToProps(dispatch) {
-  return {
-    sortByLastName: function sortByLastName(memorials) {
-      dispatch((0, _actionCreators.sortMemorialsByLastName)(memorials));
-    },
-    sortByDate: function sortByDate(memorials) {
-      dispatch((0, _actionCreators.sortMemorialsByDate)(memorials));
-    }
-  };
-}
-
-function mapStateToProps(state) {
-  return {
-    memorials: state.memorials
-  };
-}
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ContentPanel2.default);
-
-/***/ }),
+/* 248 */,
 /* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27265,7 +27184,7 @@ exports = module.exports = __webpack_require__(253)(undefined);
 
 
 // module
-exports.push([module.i, ".memorial-item {\n  margin: 0 20px -1px;\n  padding: 20px;\n  border: 1px solid #eee;\n  transition: all 0.2s; }\n  .memorial-item:hover {\n    cursor: pointer;\n    background-color: #2d7dff;\n    border-color: #2d7dff; }\n    .memorial-item:hover .memorial-name,\n    .memorial-item:hover .memorial-text-content {\n      color: white; }\n\n.memorial-image {\n  width: 100px;\n  height: 100px;\n  background-color: #eee;\n  border-radius: 100%;\n  display: inline-block;\n  vertical-align: middle;\n  border: 5px solid white;\n  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); }\n\n.memorial-text-content {\n  display: inline-block;\n  vertical-align: middle;\n  margin-left: 10px;\n  color: #888;\n  font-weight: 300;\n  font-size: 14px; }\n  .memorial-text-content .memorial-name {\n    font-weight: bold;\n    color: #000;\n    font-size: 18px; }\n  .memorial-text-content p {\n    margin: 2px; }\n\n.footer {\n  border-top: 1px solid #eee;\n  padding: 20px;\n  text-align: center;\n  margin-top: 50px; }\n\n.footer-element {\n  display: inline-block;\n  margin: 0 15px; }\n  .footer-element a {\n    color: #333;\n    text-decoration: none; }\n    .footer-element a:hover {\n      text-decoration: underline; }\n\n.content-panel {\n  padding: 20px; }\n\n.sort-button-container {\n  text-align: center; }\n\n.sort-button {\n  padding: 12px 32px;\n  background-color: #3289FF;\n  color: white;\n  font-size: 16px;\n  font-weight: 400;\n  border-radius: 10px;\n  border: 1px solid #eee;\n  outline: none;\n  margin: 5px 10px;\n  transition: background-color 0.5s; }\n  .sort-button:hover {\n    background-color: #166ee6; }\n\n.memorial-placeholder {\n  background-color: #ddd;\n  margin: 0 20px -1px;\n  padding: 20px;\n  border: 1px solid #eee;\n  transition: all 0.2s;\n  height: 112px;\n  animation: pulse 1.5s infinite linear; }\n\n@keyframes pulse {\n  0% {\n    background-color: #ccc; }\n  50% {\n    background-color: #ddd; }\n  100% {\n    background-color: #ccc; } }\n\n.header {\n  padding: 20px; }\n", ""]);
+exports.push([module.i, ".memorial-item {\n  margin: 0 20px -1px;\n  padding: 20px;\n  border: 1px solid #eee;\n  transition: all 0.2s; }\n  .memorial-item:hover {\n    cursor: pointer;\n    background-color: #2d7dff;\n    border-color: #2d7dff; }\n    .memorial-item:hover .memorial-name,\n    .memorial-item:hover .memorial-text-content {\n      color: white; }\n\n.memorial-image {\n  width: 100px;\n  height: 100px;\n  background-color: #eee;\n  border-radius: 100%;\n  display: inline-block;\n  vertical-align: middle;\n  border: 5px solid white;\n  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); }\n\n.memorial-text-content {\n  display: inline-block;\n  vertical-align: middle;\n  margin-left: 10px;\n  color: #888;\n  font-weight: 300;\n  font-size: 14px; }\n  .memorial-text-content .memorial-name {\n    font-weight: bold;\n    color: #000;\n    font-size: 18px; }\n  .memorial-text-content p {\n    margin: 2px; }\n\n.footer {\n  border-top: 1px solid #eee;\n  padding: 20px;\n  text-align: center;\n  margin-top: 50px; }\n\n.footer-element {\n  display: inline-block;\n  margin: 0 15px; }\n  .footer-element a {\n    color: #333;\n    text-decoration: none; }\n    .footer-element a:hover {\n      text-decoration: underline; }\n\n.content-panel {\n  padding: 20px; }\n\nh2 {\n  text-align: center; }\n\n.sort-button-container {\n  text-align: center; }\n\n.sort-button {\n  padding: 12px 32px;\n  background-color: #3289FF;\n  color: white;\n  font-size: 16px;\n  font-weight: 400;\n  border-radius: 10px;\n  border: 1px solid #eee;\n  outline: none;\n  margin: 5px 10px;\n  transition: background-color 0.5s; }\n  .sort-button:hover {\n    background-color: #166ee6; }\n\n.memorial-placeholder {\n  background-color: #ddd;\n  margin: 0 20px -1px;\n  padding: 20px;\n  border: 1px solid #eee;\n  transition: all 0.2s;\n  height: 112px;\n  animation: pulse 1.5s infinite linear; }\n\n@keyframes pulse {\n  0% {\n    background-color: #ccc; }\n  50% {\n    background-color: #ddd; }\n  100% {\n    background-color: #ccc; } }\n\n.header {\n  padding: 20px; }\n\n.header-subtitle {\n  float: right; }\n", ""]);
 
 // exports
 
@@ -27768,6 +27687,77 @@ function toComment(sourceMap) {
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(217).Buffer))
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(76);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(195);
+
+var _actionCreators = __webpack_require__(214);
+
+var _ContentPanel = __webpack_require__(172);
+
+var _ContentPanel2 = _interopRequireDefault(_ContentPanel);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ContentContainer = function (_Component) {
+  _inherits(ContentContainer, _Component);
+
+  function ContentContainer() {
+    _classCallCheck(this, ContentContainer);
+
+    return _possibleConstructorReturn(this, (ContentContainer.__proto__ || Object.getPrototypeOf(ContentContainer)).apply(this, arguments));
+  }
+
+  _createClass(ContentContainer, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_ContentPanel2.default, null);
+    }
+  }]);
+
+  return ContentContainer;
+}(_react.Component);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    sortByLastName: function sortByLastName(memorials) {
+      dispatch((0, _actionCreators.sortMemorialsByLastName)(memorials));
+    },
+    sortByDate: function sortByDate(memorials) {
+      dispatch((0, _actionCreators.sortMemorialsByDate)(memorials));
+    }
+  };
+}
+
+function mapStateToProps(state) {
+  return {
+    memorials: state.memorials
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ContentPanel2.default);
 
 /***/ })
 /******/ ]);

@@ -3,11 +3,9 @@ import { connect } from 'react-redux'
 
 import { fetchMemorials, sortMemorialsByDate, sortMemorialsByLastName } from '../actions/actionCreators'
 
-import Header from './Header'
 import ContentPanel from './ContentPanel'
-import Footer from './Footer'
 
-class Main extends Component {
+class ContentContainer extends Component {
 
   render () {
     return (
