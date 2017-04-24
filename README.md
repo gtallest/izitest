@@ -4,6 +4,11 @@ This is my attempt at the Everdays coding project. Using React and Redux, the ap
 
 View live at: [http://marcdwong.com/izitest/](http://marcdwong.com/izitest/)
 
+## Installing
+To run locally, run:
+1. `npm install`
+2. `npm run start`
+
 ## Technologies Used
 - React
 - Redux
