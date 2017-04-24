@@ -23760,6 +23760,8 @@ function fetchMemorials() {
   return function (dispatch) {
     return _axios2.default.get('https://dev.requiemapp.com/public/memorial/random').then(function (response) {
       return dispatch(receiveMemorials(response));
+    }).catch(function (error) {
+      return console.log(error);
     });
   };
 }

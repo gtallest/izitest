@@ -53,5 +53,6 @@ export function fetchMemorials () {
   return dispatch => {
     return axios.get('https://dev.requiemapp.com/public/memorial/random')
       .then(response => dispatch(receiveMemorials(response)))
+      .catch(error => console.log(error))
   }
 }
