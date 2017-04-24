@@ -1,0 +1,40 @@
+.content-panel {
+  padding: 20px;
+}
+
+.sort-button-container {
+  text-align: center;
+}
+
+.sort-button {
+  padding: 12px 32px;
+  background-color: #3289FF;
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  outline: none;
+  margin: 5px 10px;
+  transition: background-color 0.5s;
+  &:hover {
+    background-color: #166ee6;
+  }
+}
+
+
+.memorial-placeholder {
+  background-color: #ddd;
+  margin: 0 20px -1px;
+  padding: 20px;
+  border: 1px solid #eee;
+  transition: all 0.2s;
+  height: 112px;
+  animation: pulse 1.5s infinite linear;
+}
+
+@keyframes pulse {
+  0% { background-color: #ccc; }
+  50% { background-color: #ddd; }
+  100% { background-color: #ccc; }
+}
