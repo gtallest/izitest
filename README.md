@@ -2,6 +2,8 @@
 
 This is my attempt at the Everdays coding project. Using React and Redux, the app queries the Everdays API and displays the returned set of Memorials in order by creation date. Two buttons are included to change the sorting of the Memorials: by date, and by last name.
 
+View live at: [http://marcdwong.com/izitest/](http://marcdwong.com/izitest/)
+
 ## Technologies Used
 - React
 - Redux
